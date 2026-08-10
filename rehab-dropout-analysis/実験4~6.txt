@@ -1,0 +1,61 @@
+.mode csv
+sqlite> .import /Users/matsuurayukiya/Desktop/リハビリ離脱率分析/patients.csv patients
+sqlite> .import /Users/matsuurayukiya/Desktop/リハビリ離脱率分析/clinical_records.csv clinical_records
+sqlite> .import /Users/matsuurayukiya/Desktop/リハビリ離脱率分析/master_diseases.csv master_diseases
+sqlite> .import /Users/matsuurayukiya/Desktop/リハビリ離脱率分析/master_therapists.csv master_therapists
+sqlite> .tables
+clinical_records   master_diseases    master_therapists  patients         
+
+sqlite> SELECT COUNT(*) FROM patients;
+1001
+sqlite> SELECT COUNT(*) FROM master_therapists;
+13
+sqlite> SELECT COUNT(*) FROM master_diseases;
+27
+sqlite> SELECT COUNT(*) FROM clinical_records;
+2001
+
+SELECT * FROM clinical_records LIMIT 10;
+"患者ID","初回FIMスコア","初回疼痛VAS","自宅からの距離_km","週治療頻度","治療期間_週","離脱フラグ"
+PT0001,123,9,9.9,2,20,0
+PT0002,121,5,12.5,1,23,0
+PT0003,120,4,0.3,2,17,0
+PT0004,120,5,3.1,1,17,0
+PT0005,124,1,2.1,2,5,1
+PT0006,122,7,4.4,2,7,1
+PT0007,125,8,7.1,2,15,0
+PT0008,124,3,1.5,2,22,0
+PT0009,120,5,3.7,1,26,0
+PT0010,120,5,5.6,2,9,1
+
+
+SELECT * FROM master_diseases LIMIT 10;
+"疾患ID","疾患名","部位"
+D01,"筋筋膜性腰痛症","腰部"
+D02,"梨状筋症候群","股関節"
+D03,"変形性膝関節症","膝関節"
+D04,"肩関節周囲炎","肩関節"
+D05,"変形性股関節症","股関節"
+D06,"腰部脊柱管狭窄症","腰部"
+D07,"膝前十字靭帯損傷","膝関節"
+D08,"上腕骨骨折","肩関節"
+D09,"橈骨遠位端骨折","手関節"
+D10,"腱板断裂","肩関節"
+
+
+SELECT * FROM master_therapists LIMIT 6;
+"セラピストID","氏名","経験年数","専門分野"
+TH01,"PT_山田",12,"運動器"
+TH02,"PT_鈴木",3,"運動器"
+TH03,"PT_佐藤",8,"運動器"
+TH04,"PT_田中",1,"運動器"
+TH05,"PT_伊藤",17,"運動器"
+TH06,"PT_渡辺",5,"運動器"
+
+
+
+
+SELECT * FROM patients LIMIT 3;
+"患者ID","年齢","性別","疾患ID","セラピストID","独居フラグ","就労状況","介護度","併存疾患あり","保険種別"
+PT0001,79,"女性",D04,TH04,0,"無職","非該当",0,"後期高齢者"
+PT0002,65,"女性",D13,TH06,0,"就労中","非該当",0,"社会保険"

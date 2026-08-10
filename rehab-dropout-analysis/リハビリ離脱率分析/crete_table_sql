@@ -1,0 +1,38 @@
+DROP TABLE IF EXISTS clinical_records;
+DROP TABLE IF EXISTS patients;
+DROP TABLE IF EXISTS master_diseases;
+DROP TABLE IF EXISTS master_therapist;
+
+CREATE TABLE clinical_records (
+    id VARCHAR(20) PRIMARY KEY,
+    FIM INTEGER,
+    VAS INTEGER,
+    distance INTEGER,
+    treatment_frequency INTEGER,
+    duration_of_therapy INTEGER,
+    drop_out VARCHAR(5)
+);
+
+CREATE TABLE patients (
+    id VARCHAR(20) PRIMARY KEY,
+    age INTEGER,
+    gender VARCHAR(10),        -- 「女性」「男性」が入るように拡張！
+    disease_id VARCHAR(20),    -- 疾患IDの文字数制限を拡張！
+    therapist_id VARCHAR(20),  -- セラピストIDを拡張！
+    living_alone VARCHAR(5),
+    employment_status VARCHAR(50),
+    care_level VARCHAR(50),
+    has_history VARCHAR(5),
+    insurance_type VARCHAR(50)
+);
+
+CREATE TABLE master_diseases (
+    disease_id VARCHAR(20) PRIMARY KEY,
+    disease_name VARCHAR(100)
+);
+
+CREATE TABLE master_therapist (
+    therapist_id VARCHAR(20) PRIMARY KEY,
+    therapist_name VARCHAR(50),
+    years_of_experience INTEGER
+);
