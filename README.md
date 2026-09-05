@@ -13,7 +13,7 @@
 * **疾患別 ($p < 0.001$)【最主要因子】**
   * **筋筋膜性腰痛症（56.4%）**や**梨状筋症候群（50.0%）**など、痛みが主症状であり保存療法メインの疾患で離脱率が突出して高い。
  * 一方で、**TKA術後（11.5%）**や**骨折系（7.7%〜14.6%）**など、明確な治癒ゴールやリハビリプログラムが確立されている疾患は継続率が高い。
-    *<img width="361" height="217" alt="image" src="https://github.com/user-attachments/assets/82ebc7c6-c222-49ca-a4d0-2ae100b83a7f" />
+    <img width="361" height="217" alt="image" src="https://github.com/user-attachments/assets/82ebc7c6-c222-49ca-a4d0-2ae100b83a7f" />
 
 * **担当療法士別 ($p = 0.012$)**
   * PTごとの離脱率に **15.4% 〜 30.4%** の有意なバラつきが存在。
