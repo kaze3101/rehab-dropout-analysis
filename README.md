@@ -58,13 +58,22 @@
 ## 🔍 使用したSQLクエリと実行結果
 
 本分析において、データベースからのデータ抽出および集計に使用した主要なSQL文とその実行結果です。
-#患者数の集計
+<summary>患者数の集計</summary>
+
+```sql
 SELECT COUNT(*) FROM patients;
+```
 | COUNT(*) |
 |----------|
 |     1000 |
+
 <details>
-<summary>患者データから全データを取得　SELECT * FROM patients;</summary>
+<summary>患者データから全データを取得</summary>
+
+```sql
+SELECT * FROM patients;
+```
+
 | id     | age | gender | disease_id | therapist_id | living_alone | employment_status | care_level | has_history | insurance_type |
 |--------|-----|--------|------------|--------------|--------------|-------------------|------------|-------------|----------------|
 | PT0001 |  79 | 女性     | D04        | TH04         | 0            | 無職                | 非該当        | 0           | 後期高齢者          |
@@ -1067,12 +1076,16 @@ SELECT COUNT(*) FROM patients;
 | PT0998 |  57 | 女性     | D02        | TH03         | 0            | 就労中               | 非該当        | 0           | 国保             |
 | PT0999 |  68 | 男性     | D13        | TH04         | 0            | 無職                | 要支援1       | 1           | 国保             |
 | PT1000 |  69 | 女性     | D05        | TH06         | 1            | 無職                | 非該当        | 0           | 国保             |
+
 </details>
 
 <details>
-<summary>65歳以上の患者を抽出 
+<summary>65歳以上の患者を抽出</summary>
+
+ ```sql
  SELECT id,age,gender FROM patients; 
-</summary>
+```
+
 | id     | age | gender |
 |--------|-----|--------|
 | PT0001 |  79 | 女性     |
@@ -1684,11 +1697,13 @@ SELECT COUNT(*) FROM patients;
 </details>
 
 <details>
-<summary>女性患者を抽出する
+<summary>女性患者を抽出する</summary>
+```sql
 SELECT id,age,gender 
 FROM patients
 WHERE gender = "女性";
-</summary>
+```
+ 
 | id      |age | gender |
 |--------|-----|--------|
 | PT0001 |  79 | 女性     |
@@ -2244,13 +2259,18 @@ WHERE gender = "女性";
 | PT0996 |  64 | 女性     |
 | PT0998 |  57 | 女性     |
 | PT1000 |  69 | 女性     |
+
 </details>
+
 <details>
-<summary>就労中の患者を抽出する
+<summary>就労中の患者を抽出する</summary>
+
+```sql
 SELECT id,age,employment_status
 FROM patients
 WHERE employment_status = "就労中";
-</summary>
+```
+
 | id     | age | employment_status |
 |--------|-----|-------------------|
 | PT0002 |  65 | 就労中               |
@@ -2720,12 +2740,15 @@ WHERE employment_status = "就労中";
 | PT0996 |  64 | 就労中               |
 | PT0998 |  57 | 就労中               |
 </details>
+
 <details>
-<summary>年齢の高い順に並ぶ
+<summary>年齢の高い順に並ぶ</summary>
+```sql
 SELECT id,age,gender 
 FROM patients
 ORDER BY age DESC;
-</summary>
+```
+
 | id     | age | gender |
 |--------|-----|--------|
 | PT0952 |  90 | 女性     |
@@ -3730,6 +3753,7 @@ ORDER BY age DESC;
 | PT0906 |  18 | 女性     |
 </details>
 
+
 年齢が高い患者を10人取得する
 SELECT id,age,gender 
 FROM patients
@@ -3748,11 +3772,14 @@ LIMIT 10;
 | PT0171 |  88 | 男性     |
 | PT0023 |  87 | 女性     |
 
-保険の種類の一覧を取得する
+<summary>保険の種類の一覧を取得する</summary>
+
+```sql
 SELECT insurance_type 
 FROM patients 
 GROUP BY insurance_type 
 ORDER BY insurance_type ASC;
+```
 | insurance_type |
 |----------------|
 | 労災             |
@@ -3762,12 +3789,13 @@ ORDER BY insurance_type ASC;
 | 自賠責            |
 
 <details>
-<summary>介護認定を受けている患者を抽出する
+<summary>介護認定を受けている患者を抽出する</summary>
+ ```sql
  SELECT id,age,care_level
  FROM patients
  WHERE not care_level = "非該当"
  ORDER BY age,care_level ASC;
-</summary>
+```
 | id     | age | care_level |
 |--------|-----|------------|
 | PT0048 |  65 | 要介護1       |
@@ -3884,6 +3912,7 @@ ORDER BY insurance_type ASC;
 | PT0638 |  86 | 要介護1       |
 | PT0563 |  88 | 要支援2       |
 | PT0501 |  88 | 要支援2       |
+</details>
 
 新しい患者を登録する
 INSERT INTO patients (id,age,gender,disease_id,therapist_id,living_alone,employment_status,care_level,has_history,insurance_type) VALUES ("PT1001",58,"男性","D03","TH03",0,"就労中","非該当",1,"国保");
@@ -3895,7 +3924,6 @@ WHERE id = "PT1001";
 | id     | age | gender | disease_id | therapist_id | living_alone | employment_status | care_level | has_history | insurance_type |
 |--------|-----|--------|------------|--------------|--------------|-------------------|------------|-------------|----------------|
 | PT1001 |  58 | 男性     | D03        | TH03         | 0            | 就労中               | 非該当        | 1           | 国保             |
-
 SELECT COUNT(*)
 FROM patients;
 | COUNT(*) |
@@ -4036,10 +4064,13 @@ GROUP BY care_level;
 | 要介護3以上     |        3 |
 
 <details>
-<summary>患者情報に疾患名を追加する
+<summary>患者情報に疾患名を追加する</summary>
+
+```sql
 SELECT P.id,P.age,M.disease_id,M.disease_name
 FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_id;
-</summary>
+```
+
 | id     | age | disease_id | disease_name |
 |--------|-----|------------|--------------|
 | PT0001 |  79 | D04        | 肩関節周囲炎       |
@@ -5043,12 +5074,15 @@ FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_i
 | PT0999 |  68 | D13        | TKA術後        |
 | PT1000 |  69 | D05        | 変形性股関節症      |
 </details>
+
 <details>
-<summary>
-患者情報に担当療法士名を追加する
+<summary>患者情報に担当療法士名を追加する</summary>
+
+```sql
 SELECT P.id,P.age,MT.therapist_id,MT.therapist_name,MT.years_of_experience
 FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.therapist_id;
-</summary>
+```
+
 | id     | age | therapist_id | therapist_name | years_of_experience |
 |--------|-----|--------------|----------------|---------------------|
 | PT0001 |  79 | TH04         | PT_田中          |                   1 |
@@ -6052,12 +6086,15 @@ FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.ther
 | PT0999 |  68 | TH04         | PT_田中          |                   1 |
 | PT1000 |  69 | TH06         | PT_渡辺          |                   5 |
 </details>
+
 <details>
-<summary>
-患者情報と臨床記録を結合する
+<summary>患者情報と臨床記録を結合する</summary>
+
+```sql 
 SELECT P.id,P.age,P.gender,CR.FIM,CR.VAS,CR.drop_out
 FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id;
-</summary>
+```
+
 | id     | age | gender | FIM | VAS | drop_out |
 |--------|-----|--------|-----|-----|----------|
 | PT0001 |  79 | 女性     | 123 |   9 | 0        |
@@ -7060,15 +7097,19 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id;
 | PT0998 |  57 | 女性     | 126 |   5 | 1        |
 | PT0999 |  68 | 男性     | 125 |   5 | 0        |
 | PT1000 |  69 | 女性     | 120 |   6 | 0        |
-|        |     |        |     |     |          |
+
 </details>
+
 <details>
-<summary>4つのテーブルを結合する
+<summary>4つのテーブルを結合する</summary>
+
+```sql
 SELECT P.id,P.age,P.gender,MD.disease_name,MT.therapist_name,CR.FIM,CR.VAS,CR.drop_out
 FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
      INNER JOIN master_therapist AS MT ON P.therapist_id = MT.therapist_id
      INNER JOIN master_diseases AS MD ON P.disease_id = MD.disease_id;
-</summary>
+```
+
 | id     | age | gender | disease_name | therapist_name | FIM | VAS | drop_out |
 |--------|-----|--------|--------------|----------------|-----|-----|----------|
 | PT0001 |  79 | 女性     | 肩関節周囲炎       | PT_田中          | 123 |   9 | 0        |
@@ -8071,8 +8112,12 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
 | PT0998 |  57 | 女性     | 梨状筋症候群       | PT_佐藤          | 126 |   5 | 1        |
 | PT0999 |  68 | 男性     | TKA術後        | PT_田中          | 125 |   5 | 0        |
 | PT1000 |  69 | 女性     | 変形性股関節症      | PT_渡辺          | 120 |   6 | 0        |
+
 </details>
-#疾患別の離脱率を集計する
+
+
+<summary>疾患別の離脱率を集計する</summary>
+ ```sql
  SELECT 
  MD.disease_name AS 疾患名,
  count(P.id) AS 患者数,
@@ -8082,6 +8127,8 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
 FROM patients P INNER JOIN master_diseases MD ON P.disease_id = MD.disease_id
      INNER JOIN clinical_records AS CR ON CR.id = P.id
  GROUP BY MD.disease_name;
+ ```
+ 
 | 疾患名      | 患者数 | 継続率      | 離脱率     |
 |----------|-----|----------|---------|
 | 肩関節周囲炎   |  99 | 87.87879 | 12.1212 |
@@ -8097,7 +8144,10 @@ FROM patients P INNER JOIN master_diseases MD ON P.disease_id = MD.disease_id
 | 上腕骨骨折    |  48 | 85.41667 | 14.5833 |
 | 足関節捻挫    |  34 | 79.41176 | 20.5882 |
 | 膝前十字靭帯損傷 |  37 | 81.08108 | 18.9189 |
-#担当療法士別の離脱率を集計する
+
+<summary>担当療法士別の離脱率を集計する</summary>
+
+```sql
 SELECT
 MT.therapist_name AS 療法士,
 count(P.id) AS 患者数,
@@ -8107,6 +8157,8 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       INNER JOIN master_therapist AS MT ON MT.therapist_id = P.therapist_id
       GROUP BY MT.therapist_name;
+```
+
 | 療法士   | 患者数 | 継続率      | 離脱率     |
 |-------|-----|----------|---------|
 | PT_田中 | 171 | 69.59064 | 30.4094 |
@@ -8116,7 +8168,9 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
 | PT_山田 | 167 | 79.64072 | 20.3593 |
 | PT_鈴木 | 176 | 69.88636 | 30.1136 |
       
-#男女別の離脱率を集計する
+<summary>男女別の離脱率を集計する</summary>
+
+```sql
 SELECT 
 P.gender AS 性別,
 count(P.id) AS 患者数,
@@ -8125,12 +8179,16 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
   FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY P.gender;
+```
+
 | 性別 | 患者数 | 継続率      | 離脱率     |
 |----|-----|----------|---------|
 | 女性 | 553 | 77.21519 | 22.7848 |
 | 男性 | 447 | 72.25951 | 27.7405 |
 
-#就労状況別の離脱率を集計する
+<summary>就労状況別の離脱率を集計する</summary>
+
+```sql
 SELECT 
 P.employment_status AS 就労状況,
 count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
@@ -8138,6 +8196,8 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
    FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY P.employment_status;
+```
+
 | 就労状況  | 継続率      | 離脱率     |
 |-------|----------|---------|
 | 無職    | 72.00000 | 28.0000 |
@@ -8145,7 +8205,9 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
 | 主婦・主夫 | 74.72527 | 25.2747 |
 | 学生    | 83.33333 | 16.6667 |
 
-#介護度別の離脱率を集計する
+<summary>介護度別の離脱率を集計する</summary>
+
+```sql
 SELECT 
 P.care_level AS 介護度,
 count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
@@ -8153,6 +8215,8 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
    FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY P.care_level;
+```
+
 | 介護度    | 継続率      | 離脱率     |
 |--------|----------|---------|
 | 非該当    | 75.50790 | 24.4921 |
@@ -8161,7 +8225,11 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
 | 要介護1   | 74.07407 | 25.9259 |
 | 要介護2   | 83.33333 | 16.6667 |
 | 要介護3以上 | 66.66667 | 33.3333 |
-#独居・非独居別の離脱率を集計する
+
+
+<summary>独居・非独居別の離脱率を集計する</summary>
+```sql
+
 SELECT
 P.has_history AS 独居フラグ,
 count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
@@ -8169,12 +8237,16 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
    FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY P.has_history;
+```
+
 | 独居フラグ | 継続率      | 離脱率     |
 |-------|----------|---------|
 | 0     | 77.49604 | 22.5040 |
 | 1     | 70.73171 | 29.2683 |
 
-#自宅からの距離別の離脱率を集計する
+<summary>自宅からの距離別の離脱率を集計する</summary>
+
+```sql
 SELECT 
 CASE 
      WHEN CR.distance < 5 THEN "5km未満"
@@ -8193,13 +8265,17 @@ GROUP BY
     END
 ORDER BY
     MIN(CR.distance)ASC;
+```
+
 | 距離区分        | 継続率      | 離脱率     |
 |-------------|----------|---------|
 | 5km未満       | 76.51757 | 23.4824 |
 | 5km以上10km未満 | 74.00000 | 26.0000 |
 | 10km以上      | 69.35484 | 30.6452 |
 
-#週治療頻度別の離脱率を集計する
+<summary>週治療頻度別の離脱率を集計する</summary>
+
+```sql
 SELECT
 CR.treatment_frequency AS 治療頻度,
 count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
@@ -8207,12 +8283,16 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
    FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY CR.treatment_frequency;
+```
+
 | 治療頻度 | 継続率      | 離脱率     |
 |------|----------|---------|
 |    2 | 74.16357 | 25.8364 |
 |    1 | 75.97403 | 24.0260 |
 
-#疾患別の平均FIMを集計する
+<summary>疾患別の平均FIMを集計する</summary>
+
+```sql
 SELECT
 MD.disease_name AS 疾患名,
 COUNT(P.id) AS 患者数,
@@ -8221,6 +8301,8 @@ FROM patients P INNER JOIN master_diseases MD ON P.disease_id = MD.disease_id
      INNER JOIN clinical_records AS CR ON CR.id = P.id
 GROUP BY MD.disease_name
 ORDER BY AVG(FIM) DESC;
+```
+
 | 疾患名      | 患者数 | AVG (FIM) |
 |----------|-----|-----------|
 | 足関節捻挫    |  34 |  123.5294 |
