@@ -69,8 +69,6 @@ SELECT COUNT(*) FROM patients;
 |----------|
 |     1000 |
 
-<details>
- 
 <summary>患者データから全データを取得</summary>
 
 ```sql
@@ -78,6 +76,7 @@ SELECT * FROM patients;
 
 ```
 
+<details>
 | id     | age | gender | disease_id | therapist_id | living_alone | employment_status | care_level | has_history | insurance_type |
 |--------|-----|--------|------------|--------------|--------------|-------------------|------------|-------------|----------------|
 | PT0001 |  79 | 女性     | D04        | TH04         | 0            | 無職                | 非該当        | 0           | 後期高齢者          |
@@ -1083,7 +1082,6 @@ SELECT * FROM patients;
 
 </details>
 
-<details>
 <summary>65歳以上の患者を抽出</summary>
 
 ```sql
@@ -1091,6 +1089,7 @@ SELECT * FROM patients;
 
 ```
 
+<details>
 | id     | age | gender |
 |--------|-----|--------|
 | PT0001 |  79 | 女性     |
@@ -1702,7 +1701,6 @@ SELECT * FROM patients;
 
 </details>
 
-<details>
 <summary>女性患者を抽出する</summary>
 
 ```sql
@@ -1711,7 +1709,7 @@ FROM patients
 WHERE gender = "女性";
 
 ```
-
+<details>
 | id      |age | gender |
 |--------|-----|--------|
 | PT0001 |  79 | 女性     |
@@ -2270,7 +2268,7 @@ WHERE gender = "女性";
 
 </details>
 
-<details>
+
 <summary>就労中の患者を抽出する</summary>
 
 ```sql
@@ -2279,7 +2277,7 @@ FROM patients
 WHERE employment_status = "就労中";
 
 ```
-
+<details>
 | id     | age | employment_status |
 |--------|-----|-------------------|
 | PT0002 |  65 | 就労中               |
@@ -2751,7 +2749,6 @@ WHERE employment_status = "就労中";
 
 </details>
 
-<details>
 <summary>年齢の高い順に並ぶ</summary>
 
 ```sql
@@ -2761,6 +2758,7 @@ ORDER BY age DESC;
 
 ```
 
+<details>
 | id     | age | gender |
 |--------|-----|--------|
 | PT0952 |  90 | 女性     |
@@ -3806,6 +3804,7 @@ ORDER BY insurance_type ASC;
 | 自賠責            |
 
 <details>
+ 
 <summary>介護認定を受けている患者を抽出する</summary>
  
 ```sql
@@ -3813,6 +3812,7 @@ SELECT id,age,care_level
 FROM patients
 WHERE not care_level = "非該当"
 ORDER BY age,care_level ASC;
+
 ```
 
 | id     | age | care_level |
@@ -3931,6 +3931,7 @@ ORDER BY age,care_level ASC;
 | PT0638 |  86 | 要介護1       |
 | PT0563 |  88 | 要支援2       |
 | PT0501 |  88 | 要支援2       |
+
 </details>
 
 <summary>新しい患者を登録する</summary>
@@ -4082,7 +4083,6 @@ ORDER BY count(*) DESC;
 | D07        |       37 |
 | D12        |       34 |
 | D10        |       31 |
-
 
 <summary>男女別の患者数を集計する</summary>
 
@@ -8572,7 +8572,6 @@ ORDER BY age DESC;
 |--------|----|
 | PT0952 | 90 |
 
-<details>
 <summary>離脱した患者の情報を取得する</summary>
 
 ```sql
@@ -8593,8 +8592,10 @@ INNER JOIN clinical_records CR
 INNER JOIN master_therapist MT 
     ON MT.therapist_id = P.therapist_id
 WHERE CR.drop_out = 1;
+
 ```
 
+<details>
 | 患者ID   | 年齢 | 性別 | 疾患名      | 療法士名  | 治療期間 | 離脱フラグ |
 |--------|----|----|----------|-------|------|-------|
 | PT0005 | 71 | 女性 | 梨状筋症候群   | PT_山田 |    5 | 1     |
@@ -8847,9 +8848,9 @@ WHERE CR.drop_out = 1;
 | PT0990 | 58 | 女性 | 頚椎・腰椎捻挫  | PT_山田 |    7 | 1     |
 | PT0996 | 64 | 女性 | 筋筋膜性腰痛症  | PT_山田 |    2 | 1     |
 | PT0998 | 57 | 女性 | 梨状筋症候群   | PT_佐藤 |    2 | 1     |
+
 </details>
 
-<details>
 <summary>FIMが80以上で離脱していない患者を取得</summary>
 
 ```sql
@@ -8868,7 +8869,7 @@ WHERE
     CR.FIM >=80
     AND CR.drop_out = 0;
 ```
-
+<details>
 | 患者ID   | 年齢 | 疾患名      | 初回FIMスコア | 離脱フラグ |
 |--------|----|----------|----------|-------|
 | PT0001 | 79 | 肩関節周囲炎   |      123 | 0     |
