@@ -3803,8 +3803,6 @@ ORDER BY insurance_type ASC;
 | 社会保険           |
 | 自賠責            |
 
-<details>
- 
 <summary>介護認定を受けている患者を抽出する</summary>
  
 ```sql
@@ -3814,7 +3812,7 @@ WHERE not care_level = "非該当"
 ORDER BY age,care_level ASC;
 
 ```
-
+<details>
 | id     | age | care_level |
 |--------|-----|------------|
 | PT0048 |  65 | 要介護1       |
@@ -4150,7 +4148,7 @@ GROUP BY care_level;
 | 要介護2       |        6 |
 | 要介護3以上     |        3 |
 
-<details>
+
 <summary>患者情報に疾患名を追加する</summary>
 
 ```sql
@@ -4159,6 +4157,7 @@ FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_i
 
 ```
 
+<details>
 | id     | age | disease_id | disease_name |
 |--------|-----|------------|--------------|
 | PT0001 |  79 | D04        | 肩関節周囲炎       |
@@ -5164,7 +5163,6 @@ FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_i
 
 </details>
 
-<details>
 <summary>患者情報に担当療法士名を追加する</summary>
 
 ```sql
@@ -5173,6 +5171,7 @@ FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.ther
 
 ```
 
+<details>
 | id     | age | therapist_id | therapist_name | years_of_experience |
 |--------|-----|--------------|----------------|---------------------|
 | PT0001 |  79 | TH04         | PT_田中          |                   1 |
@@ -6178,7 +6177,6 @@ FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.ther
 
 </details>
 
-<details>
 <summary>患者情報と臨床記録を結合する</summary>
 
 ```sql 
@@ -6187,6 +6185,7 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id;
 
 ```
 
+<details>
 | id     | age | gender | FIM | VAS | drop_out |
 |--------|-----|--------|-----|-----|----------|
 | PT0001 |  79 | 女性     | 123 |   9 | 0        |
@@ -7192,7 +7191,6 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id;
 
 </details>
 
-<details>
 <summary>4つのテーブルを結合する</summary>
 
 ```sql
@@ -7203,6 +7201,7 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
 
 ```
 
+<details>
 | id     | age | gender | disease_name | therapist_name | FIM | VAS | drop_out |
 |--------|-----|--------|--------------|----------------|-----|-----|----------|
 | PT0001 |  79 | 女性     | 肩関節周囲炎       | PT_田中          | 123 |   9 | 0        |
