@@ -62,16 +62,21 @@
 
 ```sql
 SELECT COUNT(*) FROM patients;
+
 ```
+
 | COUNT(*) |
 |----------|
 |     1000 |
 
 <details>
+ 
 <summary>患者データから全データを取得</summary>
 
 ```sql
 SELECT * FROM patients;
+
+```
 
 | id     | age | gender | disease_id | therapist_id | living_alone | employment_status | care_level | has_history | insurance_type |
 |--------|-----|--------|------------|--------------|--------------|-------------------|------------|-------------|----------------|
@@ -2743,6 +2748,7 @@ WHERE employment_status = "就労中";
 | PT0995 |  58 | 就労中               |
 | PT0996 |  64 | 就労中               |
 | PT0998 |  57 | 就労中               |
+
 </details>
 
 <details>
@@ -4150,6 +4156,7 @@ GROUP BY care_level;
 ```sql
 SELECT P.id,P.age,M.disease_id,M.disease_name
 FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_id;
+
 ```
 
 | id     | age | disease_id | disease_name |
@@ -5163,6 +5170,7 @@ FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_i
 ```sql
 SELECT P.id,P.age,MT.therapist_id,MT.therapist_name,MT.years_of_experience
 FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.therapist_id;
+
 ```
 
 | id     | age | therapist_id | therapist_name | years_of_experience |
@@ -6176,6 +6184,7 @@ FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.ther
 ```sql 
 SELECT P.id,P.age,P.gender,CR.FIM,CR.VAS,CR.drop_out
 FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id;
+
 ```
 
 | id     | age | gender | FIM | VAS | drop_out |
@@ -7191,6 +7200,7 @@ SELECT P.id,P.age,P.gender,MD.disease_name,MT.therapist_name,CR.FIM,CR.VAS,CR.dr
 FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
      INNER JOIN master_therapist AS MT ON P.therapist_id = MT.therapist_id
      INNER JOIN master_diseases AS MD ON P.disease_id = MD.disease_id;
+
 ```
 
 | id     | age | gender | disease_name | therapist_name | FIM | VAS | drop_out |
@@ -8202,6 +8212,7 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
 <summary>疾患別の離脱率を集計する</summary>
  
  ```sql
+
  SELECT 
  MD.disease_name AS 疾患名,
  count(P.id) AS 患者数,
@@ -8211,7 +8222,8 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
 FROM patients P INNER JOIN master_diseases MD ON P.disease_id = MD.disease_id
      INNER JOIN clinical_records AS CR ON CR.id = P.id
  GROUP BY MD.disease_name;
- ```
+
+```
  
 | 疾患名      | 患者数 | 継続率      | 離脱率     |
 |----------|-----|----------|---------|
@@ -8299,6 +8311,7 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
    FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY P.care_level;
+
 ```
 
 | 介護度    | 継続率      | 離脱率     |
@@ -8322,6 +8335,7 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
  * 100/count(*) AS 離脱率
    FROM patients P INNER JOIN clinical_records CR ON P.id = CR.id 
       GROUP BY P.has_history;
+
 ```
 
 | 独居フラグ | 継続率      | 離脱率     |
