@@ -72,7 +72,6 @@ SELECT COUNT(*) FROM patients;
 
 ```sql
 SELECT * FROM patients;
-```
 
 | id     | age | gender | disease_id | therapist_id | living_alone | employment_status | care_level | has_history | insurance_type |
 |--------|-----|--------|------------|--------------|--------------|-------------------|------------|-------------|----------------|
@@ -1082,8 +1081,9 @@ SELECT * FROM patients;
 <details>
 <summary>65歳以上の患者を抽出</summary>
 
- ```sql
+```sql
  SELECT id,age,gender FROM patients; 
+
 ```
 
 | id     | age | gender |
@@ -1694,16 +1694,19 @@ SELECT * FROM patients;
 | PT0997 |  80 | 男性     |
 | PT0999 |  68 | 男性     |
 | PT1000 |  69 | 女性     |
+
 </details>
 
 <details>
 <summary>女性患者を抽出する</summary>
+
 ```sql
 SELECT id,age,gender 
 FROM patients
 WHERE gender = "女性";
+
 ```
- 
+
 | id      |age | gender |
 |--------|-----|--------|
 | PT0001 |  79 | 女性     |
@@ -2269,6 +2272,7 @@ WHERE gender = "女性";
 SELECT id,age,employment_status
 FROM patients
 WHERE employment_status = "就労中";
+
 ```
 
 | id     | age | employment_status |
@@ -2743,10 +2747,12 @@ WHERE employment_status = "就労中";
 
 <details>
 <summary>年齢の高い順に並ぶ</summary>
+
 ```sql
 SELECT id,age,gender 
 FROM patients
 ORDER BY age DESC;
+
 ```
 
 | id     | age | gender |
@@ -3751,14 +3757,19 @@ ORDER BY age DESC;
 | PT0481 |  18 | 男性     |
 | PT0840 |  18 | 男性     |
 | PT0906 |  18 | 女性     |
+
 </details>
 
+<sumary>年齢が高い患者を10人取得する</summary>
 
-年齢が高い患者を10人取得する
+```sql
 SELECT id,age,gender 
 FROM patients
 ORDER BY age DESC
 LIMIT 10;
+
+```
+
 | id     | age | gender |
 |--------|-----|--------|
 | PT0952 |  90 | 女性     |
@@ -3790,11 +3801,12 @@ ORDER BY insurance_type ASC;
 
 <details>
 <summary>介護認定を受けている患者を抽出する</summary>
- ```sql
- SELECT id,age,care_level
- FROM patients
- WHERE not care_level = "非該当"
- ORDER BY age,care_level ASC;
+ 
+```sql
+SELECT id,age,care_level
+FROM patients
+WHERE not care_level = "非該当"
+ORDER BY age,care_level ASC;
 ```
 
 | id     | age | care_level |
@@ -3916,7 +3928,10 @@ ORDER BY insurance_type ASC;
 </details>
 
 <summary>新しい患者を登録する</summary>
+
+```sql
 INSERT INTO patients (id,age,gender,disease_id,therapist_id,living_alone,employment_status,care_level,has_history,insurance_type) VALUES ("PT1001",58,"男性","D03","TH03",0,"就労中","非該当",1,"国保");
+```
 
 <summary>登録した患者を確認する</summary>
 
@@ -4113,6 +4128,7 @@ ORDER BY COUNT(*) DESC;
 
 
 <summary>介護度ごとの患者数を集計する</summary>
+
 ```sql
 SELECT care_level,count(*)
 FROM patients
@@ -5138,6 +5154,7 @@ FROM patients AS P INNER JOIN master_diseases AS M ON P.disease_id = M.disease_i
 | PT0998 |  57 | D02        | 梨状筋症候群       |
 | PT0999 |  68 | D13        | TKA術後        |
 | PT1000 |  69 | D05        | 変形性股関節症      |
+
 </details>
 
 <details>
@@ -6150,6 +6167,7 @@ FROM patients AS P INNER JOIN master_therapist AS MT ON P.therapist_id = MT.ther
 | PT0998 |  57 | TH03         | PT_佐藤          |                   8 |
 | PT0999 |  68 | TH04         | PT_田中          |                   1 |
 | PT1000 |  69 | TH06         | PT_渡辺          |                   5 |
+
 </details>
 
 <details>
@@ -8182,6 +8200,7 @@ FROM patients AS P INNER JOIN clinical_records AS CR ON P.id = CR.id
 
 
 <summary>疾患別の離脱率を集計する</summary>
+ 
  ```sql
  SELECT 
  MD.disease_name AS 疾患名,
@@ -8293,6 +8312,7 @@ count(CASE WHEN CR.drop_out = 0 THEN 1 END)* 100.0/count(*) AS 継続率,
 
 
 <summary>独居・非独居別の離脱率を集計する</summary>
+
 ```sql
 
 SELECT
