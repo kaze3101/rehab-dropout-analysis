@@ -39,8 +39,8 @@
 
 ## 🛠️ 使用技術・ツール
 
-* **Database / SQL**: MySQL / SQLite (TablePlus) — 条件別クロス集計・抽出クエリの作成
-* **Data Processing & Analytics**: Python (pandas, scipy.stats) — カイ二乗検定（Chi-square test）による有意差検証
+* **Database / SQL**: MySQL /  (TablePlus) — 条件別クロス集計・抽出クエリの作成
+* **Analytics**:  カイ二乗検定（Chi-square test）による有意差検証
 * **Visualization**: Excel Dashboard — 視覚的報告用ダッシュボードの構築
 * **Version Control**: Git / GitHub — フィーチャーブランチ運用による開発管理
 
